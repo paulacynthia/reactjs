@@ -1,10 +1,16 @@
+import { useState, useEffect } from "react";
 import { RepositoryItem } from "./RepositoryItem";
 
 import "../styles/repositories.scss";
-import { useState, useEffect } from "react";
+
+interface Repository {
+  name: string;
+  description: string;
+  html_url: string;
+}
 
 export function RepositoryList() {
-  const [repositories, setRepositories] = useState([]);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
 
   /* Dentro do useEffect foi feito um fetch na api do github para buscar os 
   repositórios, quando esse fetch devolver uma resposta, ela será convertida 
