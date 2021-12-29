@@ -1,11 +1,17 @@
 import { useEffect } from "react";
+import { api } from "../../services/api";
 import { Container } from "./styles";
 
 export function TransactionsTable() {
   useEffect(() => {
-    fetch("http://localhost:3000/api/transactions")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    api
+      .get("/transactions")
+      /*Requisições do tipo get, buscando informações no 
+      transactions. A barra inicial é opcional. 
+      Não precisa mais do JSON*/
+      .then((response) => console.log(response.data));
+    /* Os dados não são específicos como antes, mostra tudo agora ==> .then(data => console.log(data)). 
+    Então, para mostrar que dentro de data, estão os dados usa-se o response e especifica que campo quer apresentar */
   }, []);
 
   return (
