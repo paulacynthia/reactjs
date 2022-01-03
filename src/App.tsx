@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { Header } from "./components/Header";
 import { Dashboard } from "./components/Dashboard";
+import { NewTransactionModal } from "./components/NewTransactionModal";
 
 import Modal from "react-modal";
 
@@ -32,12 +33,10 @@ export function App() {
       repassada para o HTML da página. Dessa forma, não fazendo qualquer modificação no layout.*/}
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard /> {/* Summary está dentro do Dashboard */}
-      <Modal
+      <NewTransactionModal
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
-      >
-        <h2>Cadastrar transação!</h2>
-      </Modal>
+      />
       <GlobalStyle />
     </>
   );
