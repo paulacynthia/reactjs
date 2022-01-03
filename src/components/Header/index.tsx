@@ -1,26 +1,12 @@
-import { useState } from "react";
-import Modal from "react-modal";
 import logoImg from "../../assets/logo.svg";
 
 import { Container, Content } from "./styles";
 
-export function Header() {
-  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
-    useState(false);
-  /* Se isNewTransactionModalOpen estiver aberto, isso ficará como true 
-  setisNewTransactionModalOpen é para mudar o estado de isNewTransactionModalOpen
+interface HeaderProps {
+  onOpenNewTransactionModal: () => void /*Ou seja, a função não recebe nenhum parâmetro e nem retorna nada;*/;
+}
 
-  O valor do useState está como falso porque o Modal inicia-se fechado.
-  */
-
-  function handleOpenNewTransactionModal() {
-    setIsNewTransactionModalOpen(true);
-  }
-
-  function handleCloseNewTransactionModal() {
-    setIsNewTransactionModalOpen(false);
-  }
-
+export function Header({ onOpenNewTransactionModal }: HeaderProps) {
   return (
     <Container>
       {/*Lembrete: logoImg está entre chaves porque é 
@@ -28,16 +14,9 @@ export function Header() {
 
       <Content>
         <img src={logoImg} alt="dt money" />
-        <button type="button" onClick={handleOpenNewTransactionModal}>
+        <button type="button" onClick={onOpenNewTransactionModal}>
           Nova transação
         </button>
-
-        <Modal
-          isOpen={isNewTransactionModalOpen}
-          onRequestClose={handleCloseNewTransactionModal}
-        >
-          <h2>Cadastrar transação!</h2>
-        </Modal>
       </Content>
     </Container>
   );
