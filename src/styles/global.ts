@@ -15,6 +15,9 @@ export const GlobalStyle = createGlobalStyle`
 
     --background: #f0f2f5;
     --shape: #ffffff;
+
+    --input-background: #e7e9ee;
+    --input-border: #d7d7d7;
 }
 
 * {
@@ -77,5 +80,19 @@ html {
      padding: 3rem;
      position: relative; /* Para quando for colocado o "x", ele ficar dentro do modal e não fora */
      border-radius: 0.25rem;
+ }
+ 
+ .react-modal-close {
+     position: absolute;
+     right: 1.5rem;
+     top: 1.5rem;
+     border: 0;
+     background: transparent;
+
+     transition: filter 0.2s;
+
+     &:hover {
+         filter: brightness(0.8);
+     }
  }
 `;
