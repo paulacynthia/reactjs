@@ -1,15 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { Container } from "./styles";
+interface Transaction {
+  id: number;
+  title: string;
+  amount: number;
+  type: string;
+  category: string;
+  createdAt: string;
+}
 
 export function TransactionsTable() {
+  // O meu useState armazena um array de Transaction
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
   useEffect(() => {
     api
       .get("/transactions")
       /*Requisições do tipo get, buscando informações no 
       transactions. A barra inicial é opcional. 
       Não precisa mais do JSON*/
-      .then((response) => console.log(response.data));
+      .then((response) => setTransactions(response.data.transactions));
     /* Os dados não são específicos como antes, mostra tudo agora ==> .then(data => console.log(data)). 
     Então, para mostrar que dentro de data, estão os dados usa-se o response e especifica que campo quer apresentar */
   }, []);
@@ -26,18 +37,14 @@ export function TransactionsTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Desenvolvimento de website</td>
-            <td className="deposit">R$12.000,00</td>
-            <td>Desenvolvimento</td>
-            <td>20/02/2021</td>
-          </tr>
-          <tr>
-            <td>Aluguel</td>
-            <td className="withdraw">- R$1.100,00</td>
-            <td>Casa</td>
-            <td>17/02/2021</td>
-          </tr>
+          {transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.title}</td>
+              <td className={transaction.type}>{transaction.amount}</td>
+              <td>{transaction.category}</td>
+              <td>{transaction.createdAt}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>
