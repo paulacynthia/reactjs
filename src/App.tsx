@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import { Header } from "./components/Header";
 import { Dashboard } from "./components/Dashboard";
 import { NewTransactionModal } from "./components/NewTransactionModal";
-import { TransactionsContext } from "./TransactionsContext";
+import { TransactionsProvider } from "./TransactionsContext";
 
 import { GlobalStyle } from "./styles/global";
 
@@ -29,7 +29,7 @@ export function App() {
   }
 
   return (
-    <TransactionsContext.Provider value={[]}>
+    <TransactionsProvider>
       {/*Fragment: É um elemento que não tem nenhuma assinatura, é uma tag vazia. Basicamente, é uma div que não vai ser 
       repassada para o HTML da página. Dessa forma, não fazendo qualquer modificação no layout.*/}
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
@@ -39,6 +39,6 @@ export function App() {
         onRequestClose={handleCloseNewTransactionModal}
       />
       <GlobalStyle />
-    </TransactionsContext.Provider>
+    </TransactionsProvider>
   );
 }

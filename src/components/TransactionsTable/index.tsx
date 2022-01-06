@@ -1,29 +1,10 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { useContext } from "react";
+import { TransactionsContext } from "../../TransactionsContext";
 import { Container } from "./styles";
-interface Transaction {
-  id: number;
-  title: string;
-  amount: number;
-  type: string;
-  category: string;
-  createdAt: string;
-}
 
 export function TransactionsTable() {
   // O meu useState armazena um array de Transaction
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  useEffect(() => {
-    api
-      .get("/transactions")
-      /*Requisições do tipo get, buscando informações no 
-      transactions. A barra inicial é opcional. 
-      Não precisa mais do JSON*/
-      .then((response) => setTransactions(response.data.transactions));
-    /* Os dados não são específicos como antes, mostra tudo agora ==> .then(data => console.log(data)). 
-    Então, para mostrar que dentro de data, estão os dados usa-se o response e especifica que campo quer apresentar */
-  }, []);
+  const transactions = useContext(TransactionsContext);
 
   return (
     <Container>

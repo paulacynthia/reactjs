@@ -7,17 +7,11 @@ import { TransactionsContext } from "../../TransactionsContext";
 import { Container } from "./styles";
 
 export function Summary() {
-  const data = useContext(TransactionsContext);
-  console.log(data);
+  const transactions = useContext(TransactionsContext);
+  console.log(transactions);
 
   return (
     <Container>
-      <TransactionsContext.Consumer>
-        {(data) => {
-          console.log(data);
-          return <p>Ok!</p>;
-        }}
-      </TransactionsContext.Consumer>
       <div>
         <header>
           <p>Entradas</p>
