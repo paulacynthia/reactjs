@@ -27,15 +27,21 @@ export function NewTransactionModal({
   const [type, setType] = useState("deposit");
   /* a entrada já virá marcada como padrão */
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault(); // prevenir o funcionamento padrão de redirecionamento do onSubmit
 
-    createTransaction({
+    await createTransaction({
       title,
       amount,
       category,
       type,
     });
+
+    setTitle("");
+    setAmount(0);
+    setCategory("");
+    setType("deposit");
+    onRequestClose();
   }
 
   return (

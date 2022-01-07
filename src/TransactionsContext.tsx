@@ -29,7 +29,7 @@ interface TransactionsProviderProps {
 
 interface TransactionsContextData {
   transactions: Transaction[]; // array de transaction
-  createTransaction: (transaction: TransactionInput) => void;
+  createTransaction: (transaction: TransactionInput) => Promise<void>;
   /* Uma função que recebe por parâmetro uma transaction do tipo transactionInput que 
   devolve void (vazio) */
 }
@@ -52,12 +52,18 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     Então, para mostrar que dentro de data, estão os dados usa-se o response e especifica que campo quer apresentar */
   }, []);
 
-  function createTransaction(transaction: TransactionInput) {
+  async function createTransaction(transactionInput: TransactionInput) {
     /* Para o transaction não podemos passar a interface Transaction porque ele esperaria receber o id e a data
     e quem é responsável por passar isso é o Mirage.JS não o user. Nisso, foi criado outra interface. 
     */
     // chamada a api
-    api.post("/transactions", transaction);
+    const response = await api.post("/transactions", {
+      ...transactionInput,
+      createdAt: new Date(),
+    });
+    const { transaction } = response.data;
+
+    setTransactions([...transactions, transaction]);
   }
 
   return (
