@@ -4,7 +4,7 @@ import { Container } from "./styles";
 
 export function TransactionsTable() {
   // O meu useState armazena um array de Transaction
-  const transactions = useContext(TransactionsContext);
+  const { transactions } = useContext(TransactionsContext);
 
   return (
     <Container>
