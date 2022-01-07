@@ -1,5 +1,11 @@
-import { createContext, useEffect, useState, ReactNode } from "react";
-import { api } from "./services/api";
+import {
+  createContext,
+  useEffect,
+  useState,
+  ReactNode,
+  useContext,
+} from "react";
+import { api } from "../services/api";
 
 interface Transaction {
   id: number;
@@ -34,7 +40,7 @@ interface TransactionsContextData {
   devolve void (vazio) */
 }
 
-export const TransactionsContext = createContext<TransactionsContextData>(
+const TransactionsContext = createContext<TransactionsContextData>(
   {} as TransactionsContextData
 ); // passa um objeto vazio e força o TS a aceitar que o void tem sim o formato que queremos
 
@@ -73,4 +79,10 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
       {children}
     </TransactionsContext.Provider>
   );
+}
+
+export function useTransactions() {
+  const context = useContext(TransactionsContext);
+
+  return context;
 }
