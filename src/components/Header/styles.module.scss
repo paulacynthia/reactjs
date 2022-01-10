@@ -1,0 +1,59 @@
+.headerContainer {
+  height: 5rem;
+  border-bottom: 1px solid var(--gray-800);
+}
+
+.headerContent {
+  max-width: 1120px;
+  height: 5rem; // podia ser 100% too
+  margin: 0 auto;
+  padding: 0 2rem; /* Para caso o user diminua a tela para menos de 1120px fique um espaço de 2rem nas laterais.s */
+
+  // tudo verticalmente alinhado ao centro:
+  display: flex;
+  align-items: center;
+
+  nav {
+    margin-left: 5rem;
+    height: 5rem; // se ocupa inteiro, na hora de colocar a bordinha embaixo do selecionado evita margin negativa e várias maracutaias.
+
+    a {
+      display: inline-block;
+      position: relative; /* Porque iremos colocar na bordinha de selecionado position absolute. Mas por quề que não usamos como borda? Porque é uma borda arredondada, não tem como ter borda arredondada na propriedade border-bottom. Então, vai ter que ser after. */
+      padding: 0 0.5rem;
+      height: 5rem; // Pra ocupar a altura toda;
+      line-height: 5rem; // Vai ocupar a altura toda, mas o texto fica centralizado. Aí se eu coloco o line do mesmo tamanho da altura fica sempre ao centro.
+      color: var(--gray-300);
+
+      // para não ficar uma passagem de cor muito seca
+      transition: color 0.2s;
+
+      // toda âncora que antes dela vem uma âncora:
+      & + a {
+        margin-left: 2rem;
+      }
+
+      // quando passar o mouse por cima
+      &:hover {
+        color: var(--white);
+      }
+
+      &.active {
+        color: var(--white);
+        font-weight: bold;
+      }
+
+      /*todo o link que estiver ativo. o after serve para colocar algum elemento depois do conteúdo dessa tag, before seria antes*/
+      &.active::after {
+        content: "";
+        height: 3px;
+        border-radius: 3px 3px 0 0;
+        width: 100%;
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        background: var(--yellow-500);
+      }
+    }
+  }
+}
