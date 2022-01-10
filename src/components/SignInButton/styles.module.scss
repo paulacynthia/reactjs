@@ -1,0 +1,35 @@
+.signInButton {
+  height: 3rem;
+  border-radius: 3rem; // vai deixar o mais arredondado possível
+  background: var(--gray-850);
+  border: 0; // porque vem com tamanho padrão
+  padding: 0 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--white);
+  font-weight: bold;
+
+  svg {
+    // para mudar tamanho de svg tem que definir os dois:
+    width: 20px;
+    height: 20px;
+  }
+
+  svg:first-child {
+    // terei outro icon no final no futuro, por isso quero margin direita apenas no primeiro icon
+    margin-right: 1rem;
+  }
+
+  svg.closeIcon {
+    margin-left: 1rem;
+  }
+
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+}
