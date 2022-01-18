@@ -17,12 +17,14 @@ const signInFormSchema = yup.object().shape({
 });
 
 export default function SignIn() {
-  const { register, handleSubmit, formState } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(signInFormSchema),
   });
-
-  const { errors } = formState;
-  console.log(errors);
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
