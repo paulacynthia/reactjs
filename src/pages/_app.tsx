@@ -3,6 +3,11 @@ import { AppProps } from "next/app";
 import { theme } from "../styles/theme";
 
 import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContext";
+import { makeServer } from "../services/mirage";
+
+if (process.env.NODE_ENV === "development") {
+  makeServer();
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
