@@ -3,16 +3,24 @@ import { AuthContext } from "../contexts/AuthContext";
 import { api } from "../services/apiClient";
 import { setupAPIClient } from "../services/api";
 import { withSSRAuth } from "../utils/withSSRAuth";
+import { useCan } from "../hooks/useCan";
 
 export default function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
+
+  const userCanSeeMetrics = useCan({ permissions: ["metrics.list"] });
 
   // é importante em toda chamada a api termos alguma tratativa
   useEffect(() => {
     api.get("/me").then((response) => console.log(response));
   }, []);
 
-  return <h1>Dashboard: {user?.email}</h1>;
+  return (
+    <>
+      <h1>Dashboard: {user?.email}</h1>
+      {userCanSeeMetrics && <div>Métricas</div>}
+    </>
+  );
 }
 
 export const getServerSideProps = withSSRAuth(async (ctx) => {
