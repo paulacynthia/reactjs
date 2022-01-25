@@ -9,10 +9,7 @@ export default function Dashboard() {
 
   // é importante em toda chamada a api termos alguma tratativa
   useEffect(() => {
-    api
-      .get("/me")
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+    api.get("/me").then((response) => console.log(response));
   }, []);
 
   return <h1>Dashboard: {user?.email}</h1>;
